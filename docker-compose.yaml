@@ -67,6 +67,7 @@ services:
   cross-seed:
     image: ghcr.io/cross-seed/cross-seed:6
     container_name: cross-seed
+    user: ${PUID}:${PGID}
     ports:
       - "2468:2468"
     volumes:
@@ -77,11 +78,6 @@ services:
     depends_on:
       qbittorrent:
         condition: service_healthy
-    environment:
-      - PGID=${PGID}
-      - PUID=${PUID}
-      - DOWNLOAD_DIR=/downloads
-      - LINK_DIR=/downloads/linked
 
 volumes:
   qbittorrent-config:
